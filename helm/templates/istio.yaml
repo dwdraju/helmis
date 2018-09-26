@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "explore.fullname" . }}
+spec:
+  hosts:
+    - {{ .Values.hostName }}
+  gateways:
+  - server-gateway
+  http:
+  - route:
+    - destination:
+        port:
+          number: 8080
+        host: {{ include "explore.fullname" . }}
+        subset: release
+      weight: {{ .Values.ReleaseWeight }}
+    - destination:
+        port:
+          number: 8080
+        host: {{ include "explore.fullname" . }}
+        subset: canary
+      weight: {{ .Values.CanaryWeight }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "explore.fullname" . }}
+spec:
+  host: {{ include "explore.fullname" . }}
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+  subsets:
+  - name: release
+    labels:
+      track: release
+  - name: canary
+    labels:
+      track: canary
