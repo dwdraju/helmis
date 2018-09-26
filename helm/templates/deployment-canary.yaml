@@ -1,26 +1,26 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "explore.fullname" . }}
+  name: {{ include "explore.fullname" . }}-canary
   labels:
     app.kubernetes.io/name: {{ include "explore.name" . }}
     helm.sh/chart: {{ include "explore.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-    track: stable
+    track: canary
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "explore.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      track: stable
+      track: canary
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "explore.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        track: stable
+        track: canary
     spec:
       containers:
         - name: {{ .Chart.Name }}
