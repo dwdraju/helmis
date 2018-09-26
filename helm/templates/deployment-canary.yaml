@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     track: canary
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.canary.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "explore.name" . }}
@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.canary.image.repository }}:{{ .Values.canary.image.tag }}"
+          imagePullPolicy: {{ .Values.canary.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80

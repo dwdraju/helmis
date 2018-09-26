@@ -9,6 +9,15 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 
+canary:
+  replicaCount: 1
+
+  image:
+    repository: nginx
+    tag: stable
+    pullPolicy: IfNotPresent
+
+
 nameOverride: ""
 fullnameOverride: ""
 
