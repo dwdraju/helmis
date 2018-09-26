@@ -12,3 +12,6 @@ kubectl create -n istio-system secret tls istio-ingressgateway-certs --key priv.
 ```
 
 Read more about TLS ingress gateway from [Secure Ingress Doc](https://istio.io/docs/tasks/traffic-management/secure-ingress/)
+
+
+__Read Blog: https://medium.com/@dwdraju/canary-deployment-using-istio-with-helm-796ffa78a01c__
